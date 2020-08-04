@@ -1,0 +1,30 @@
+{% load i18n %}
+{% trans 'Ahoj,'  %} <strong>{{reservation.user.get_full_name}}</strong> {% trans 'tvoja rezervácia pre'  %}
+<br>
+{% block precontent %}{%endblock%}
+<br>
+ 
+	 <h1>{{reservation.itemi}}</h1>
+{% trans 'V čase:'  %}
+<br>
+<strong>{% trans 'Začiatok rezervácie' %}:</strong> {{reservation.reserved_start_date}}
+<br>
+<strong>{% trans 'Koniec rezervácie' %}:</strong> {{reservation.reserved_end_date}}
+
+{% block content %}{%endblock%}
+
+<br>
+<ul>
+{% for product in reservation.product_set.all %}
+	<li> <strong>{% if product.borrowed %} {% trans 'Borrowed' %} {% else %} {% trans 'Not borrowed' %} {% endif %} </strong> {{product}} </li>
+{% endfor %}
+</ul>
+
+
+{% trans 'Má aktuálny stav rezervácie :' %} <strong>{{reservation.get_status_display}}</strong>
+
+<br>
+{% block extra_contact %}
+{% endblock %}
+<br>
+{% trans 'S pozdravom tím Ynet' %}

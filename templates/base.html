@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yrent-O &mdash; Vypožičný systém OZ Ynet</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles-merged.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+  <!-- START: header -->
+
+  <div class="probootstrap-loader"></div>
+
+  <header role="banner" class="probootstrap-header">
+    <div class="container">
+       <img src="../media/item/ynet-logo-transparent.png" alt="TU MA BYT LOGO">
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            {% if user.is_authenticated %}
+          <ul class="probootstrap-main-nav">
+            <li {% if category_list_home %} class="active"{% endif %}><a href="/">Vyhľadávanie</a></li>
+            <li {% if item_list %} class="active"{% endif %}><a href="{% url 'project:item_list' %}">Inventár</a></li>
+            <li {% if rezervation_list %} class="active"{% endif %}><a href="{% url 'reservat:rezervation_list' %}">Moje rezervácie</a></li>
+            <li {% if pravidla_list %} class="active"{% endif %}><a href="{% url 'rules:pravidla_list' %}">Pravidlá používania</a></li>
+            <li {% if about %} class="active"{% endif %}><a href="{% url 'about:about' %}">O nás</a></li>
+            <li> <a href="{% url 'user_app:user_logout' %}">Odhlásenie</a></li>
+          </ul>
+           {% else %}
+          <ul class="probootstrap-main-nav">
+            <li {% if category_list_home %} class="active"{% endif %}><a href="/">Vyhľadávanie</a></li>
+            <li {% if pravidla_list %} class="active"{% endif %}><a href="{% url 'rules:pravidla_list' %}">Pravidlá používania</a></li>
+            <li {% if about %} class="active"{% endif %}><a href="{% url 'about:about' %}">O nás</a></li>
+            <li> <a href="{% url 'user_app:user_login' %}">Prihlásenie</a></li>
+            <li> <a href="{% url 'user_app:register' %}">Registrácia</a></li>
+          </ul>
+          {% endif%}
+          <div class="extra-text visible-xs">
+            <div class="col-md-6">
+              <div class="probootstrap-footer-widget">
+                  <p>&copy; 2019 . Designed by <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/adam-kotasz-08ab7b138/">Koty</a><br> Photos by <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/adam-kotasz-08ab7b138/">Koty</a> </a> </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="probootstrap-footer-widget right">
+                <ul class="probootstrap-footer-social">
+                  <li><a href="https://www.facebook.com/ozynet/"><i class="icon-facebook"></i></a></li>
+                  <li><a href="https://www.instagram.com/ozynet/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+              </div>
+        </nav>
+    </div>
+  </header>
+  <!-- END: header -->
+
+    <div class="container">
+  {% block body %} {% endblock body %}
+
+  {% block css%} {%endblock%}
+
+  {% block content %} {% endblock %}
+
+    </div>
+
+
+ </blockquote>
+  <footer class="probootstrap-footer probootstrap-bg" style="background-image: url(img/slider_3.jpg)">
+    <div class="container">
+      <div class="row copyright">
+        <div class="col-md-6">
+          <div class="probootstrap-footer-widget">
+            <p>&copy; 2019 . Designed by <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/adam-kotasz-08ab7b138/">Koty</a><br> Photos by <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/adam-kotasz-08ab7b138/">Koty</a> </a>  </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="probootstrap-footer-widget right">
+            <ul class="probootstrap-footer-social">
+              <li><a href="https://www.facebook.com/ozynet/"><i class="icon-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/ozynet/"><i class="icon-instagram2"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+  </div>
+
+
+  <script src="{% static 'js/scripts.min.js' %}"></script>
+  <script src="{% static 'js/main.min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+{% block js %}
+{%endblock%}
+
+
+
+  </body>
+</html>

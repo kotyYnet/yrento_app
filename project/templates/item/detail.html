@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="#">Home</a><span><a href="{% url 'item:item_list'  %}">Items</a></span>{{item_detail}}
+              </div>
+              <h1>{{item_detail}}</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url(img/slider_1.jpg);"></li>
+      <li style="background-image: url(img/slider_4.jpg);"></li>
+      <li style="background-image: url(img/slider_2.jpg);"></li>
+    </ul>
+  </section>
+  <!-- END: slider  -->
+
+
+  <section class="probootstrap-section">
+    <div class="container">
+          <div class="row">
+        <div class="col-md-12">
+          <p><img src="{{item_detail.image.url}}" class="img-responsive" alt="Nenačítalo obrázok"></p>
+        </div>
+      </div>
+        <div class="col-md-4 col-sm-6">
+
+
+                <div class="probootstrap-card-extra">
+            <h1 class="probootstrap-card-heading">Detaily</h1> </div>
+            <ul>
+              <span><b>Internát:</b>    {{item_detail.dormitory}}</span>
+              </ul>
+              <ul>
+                <span><b>Vlastnosti:</b></span>
+              </ul>
+            <ul>
+              <h2><span>{{item_detail.comment}}</span></h2>
+            </ul>
+
+        </div>
+      </div>
+
+  </section>
+
+</div>
+
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-8 col-sm-6">
+                <div class="probootstrap-card probootstrap-listing">
+                        <div class="probootstrap-card-text">
+                          <h1 class="probootstrap-card-heading"><h2>Dostupnosť:</h2></h1>
+                                                      {% if item_end.status == 1 %}
+                                                      <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                                      {% elif item_end.status == 2 %}
+                                                      <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                                      {% elif item_end.status == 3 %}
+                                                      <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                                      {% elif item_end.status == 4 %}
+                                                      <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                                      {% elif item_end.status == 5 %}
+                                                      <div class="probootstrap-listing-category for-sale"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                                      {% else %}
+                                                      <div class="probootstrap-listing-category for-sale"><span><h1>Predmet je volný</h1></span></div>
+                                                      {% endif %}
+                          </div>
+                    </div>
+                </div>
+          </div>
+      </div>
+
+
+
+
+          <div class="container">
+            <div class="row">
+                  <div class="probootstrap-card-extra">
+                  <div class="col-md-8 col-sm-6">
+                          <div class="probootstrap-card probootstrap-listing">
+                                  <div class="probootstrap-card-text">
+                                    <h1 class="probootstrap-card-heading"><h2>Rezervácie:</h2></h1>
+                                        {% for item in item_reser %}
+                                        <li class="list-group-item">
+                                          <h4>{{item}}</h4>
+                                        </li>
+                                        {% endfor %}
+
+                                    </div>
+                              </div>
+                          </div>
+                    </div>
+               </div>
+            </div>
+
+
+
+
+
+    {% block bod %}
+    <section class="probootstrap-section">
+      <div class="container">
+    {% if  request.user.is_authenticated %}
+      {% if request.reservation %}
+
+      <a href="{% url 'reservation_list' %}"   class="btn btn-primary" > Show  Reservation </a>
+      <ul class="list-group">
+        {% for obj in lst_object %}
+        <li class="list-group-item">
+          <a href="{% url 'myreservation' obj.pk %}" >{{obj}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'finish_reservation' %}"   class="btn btn-primary">  Finish Reservation </a>
+      {% else %}
+      <a href="{% url 'add_user_reservation_with_pk' model_pk=item_detail.id %}"  class="btn btn-primary" > Rezervuj predmet  </a>
+      {% endif %}
+
+    {% else %}
+    <div class="alert">
+      Please Login before create a reservation
+
+      <a class="btn btn-success"  href="/admin/login/?next=/"> Login </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+    {% endblock bod%}
+
+
+
+
+
+
+
+
+{% endblock body %}

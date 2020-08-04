@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block css%}
+  <link rel="stylesheet" type="text/css" media="screen"
+     href="{% static 'css/bootstrap-datetimepicker.min.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+ <style>
+ .bootstrap-datetimepicker-widget{
+ 	min-width: 250px;
+ 	width: 270px;
+ }
+ </style>
+
+{%endblock%}
+
+
+{% block content %}
+
+<!-- END: header -->
+<section class="probootstrap-slider flexslider2 page-inner">
+  <div class="overlay"></div>
+  <div class="probootstrap-wrap-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          <div class="page-title probootstrap-animate">
+            <div class="probootstrap-breadcrumbs">
+              <a href="/">Home</a><span>Rezervácie</span>
+            </div>
+            <h1>Vytvorenie novej rezervácie</h1>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="slides">
+    <li style="background-image: url(img/slider_1.jpg);"></li>
+    <li style="background-image: url(img/slider_4.jpg);"></li>
+    <li style="background-image: url(img/slider_2.jpg);"></li>
+  </ul>
+</section>
+<!-- END: slider  -->
+
+{% block content_title%}
+<h1> {% trans "Obdobie rezervácie"%} </h1>
+
+{% endblock %}
+{{form.errors}}
+<form class="form-horizontal" method="post">
+{% csrf_token %}
+
+{% block form_start %}{% endblock %}
+
+<div class="form-group">
+	{{ form.reserved_start_date.errors }}
+	<label id="{{ form.reserved_start_date.id_label_tag }}" class="col-sm-2 control-label" > {% trans 'Začiatok rezervácie' %} </label>
+<div id="dtp_reserved_start_date" class="input-append date">
+	<div class="col-sm-2">
+	      {{ form.reserved_start_date }}
+    </div>
+
+	<div class="col-sm-2">
+		 <span class="add-on">
+	        <i  class="fas fa-[calendar]"  aria-hidden="true" data-time-icon="fas fa-[hourglass]" data-date-icon="fas fa-calendar-alt"></i>
+	      </span>
+	</div>
+</div>
+</div>
+
+
+<div class="form-group">
+	{{ form.reserved_end_date.errors }}
+	<label id="{{ form.reserved_end_date.id_label_tag }}" class="col-sm-2 control-label" > {% trans 'Vrátenie predmetu' %} </label>
+<div id="dtp_reserved_end_date" class="input-append date">
+	<div class="col-sm-2">
+	      {{ form.reserved_end_date }}
+    </div>
+
+    <div class="col-sm-2">
+  		 <span class="add-on">
+  	        <i  class="fas fa-[calendar]"  aria-hidden="true" data-time-icon="fas fa-[hourglass]" data-date-icon="fas fa-calendar-alt"></i>
+  	      </span>
+  	</div>
+  </div>
+  </div>
+
+
+      <div  style="display:none;" class="form-group">
+  	       {{ form.itemi.errors }}
+  	         <label id="{{ form.itemi.id_label_tag }}" class="col-sm-2 control-label" > {% trans 'Item' %} </label>
+              <div class="probootstrap-card probootstrap-listing">
+                  <div class="probootstrap-card-media">
+  	                    <div class="col-sm-2">
+  	                         {{form.itemi}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+{% block form_end %}{% endblock %}
+
+<button type="submit" class="btn btn-success">{% trans 'Submit' %}</button>
+</form>
+
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript"
+     src="{% static 'js/bootstrap-datetimepicker.min.js' %}">
+    </script>
+
+        <script type="text/javascript">
+	      rsd= $('#dtp_reserved_start_date').datetimepicker({
+	         format: 'yyyy-MM-dd hh:mm',
+	        autoclose: true
+	      });
+	      rd= $('#dtp_reserved_end_date').datetimepicker({
+	        format: 'yyyy-MM-dd hh:mm',
+	        autoclose: true
+	      });
+</script>
+
+{% endblock %}

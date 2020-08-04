@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<!-- END: header -->
+<section class="probootstrap-slider flexslider2 page-inner">
+	<div class="overlay"></div>
+	<div class="probootstrap-wrap-banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+
+					<div class="page-title probootstrap-animate">
+						<div class="probootstrap-breadcrumbs">
+							<a href="/">Home</a><span>Rezervácie</span>
+						</div>
+						<h1>Potvrdenie rezervácie</h1>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul class="slides">
+		<li style="background-image: url(img/slider_1.jpg);"></li>
+		<li style="background-image: url(img/slider_4.jpg);"></li>
+		<li style="background-image: url(img/slider_2.jpg);"></li>
+	</ul>
+</section>
+<!-- END: slider  -->
+<section class="probootstrap-section probootstrap-section-lighter">
+<div class="row">
+	 <div class="col-md-8 col-md-offset-2">
+
+		<form class="form-horizontal" method="post">
+			{% csrf_token %}
+			<h2>{% trans 'Prosím potvrďte rezerváciu' %}</h2>
+
+			<input type="submit"
+			class="btn btn-success" value="{% trans 'Potvrdenie rezervácie' %}" />
+		</form>
+	</div>
+</div>
+</section>
+
+{% endblock %}

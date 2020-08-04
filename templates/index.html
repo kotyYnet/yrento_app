@@ -1,0 +1,15 @@
+{% extends 'base2.html' %}
+{% block body_block %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Vítajte na stránke projektu Y-rentO</h1>
+    {% if user.is_authenticated %}
+        <h2>Vítaj {{ user.username }}!</h2>
+    {% else %}
+        <h2>Vítajte na našej stránke!</h2>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+  <!-- END: header -->
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="#">Home</a><span>Predmety</span>
+              </div>
+              <h1>Zoznam predmetov</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END: slider  -->
+  <section class="probootstrap-section probootstrap-section-lighter">
+    <div class="container">
+      <div class="row">
+        {% if item_list.aviability != "ynet" %}
+
+            {% for item in item_list %}
+
+
+
+            <div class="col-md-4 col-sm-6">
+              <div class="probootstrap-card probootstrap-listing">
+                <div class="probootstrap-card-media">
+                  <img src="{{item.image.url}}" class="img-responsive" alt="No pictu">
+                </div>
+                <div class="probootstrap-card-text">
+                  <h1 class="probootstrap-card-heading"><a href="{% url 'item:item_detail' item.id %}"><h2>{{item}}</h2></a></h1>
+                            {% if item_end == item.id %}
+
+                                    {% if item_end.status == 1 %}
+                                    <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                    {% elif item_end.status == 2 %}
+                                    <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                    {% elif item_end.status == 3 %}
+                                    <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                    {% elif item_end.status == 4 %}
+                                    <div class="probootstrap-listing-category for-rent"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                    {% elif item_end.status == 5 %}
+                                    <div class="probootstrap-listing-category for-sale"><span><h1>{{item_end.get_status_display}}</h1></span></div>
+                                    {% else %}
+                                    <div class="probootstrap-listing-category for-sale"><span><h1>Predmet je volný</h1></span></div>
+                                    {% endif %}
+
+                            {% endif %}
+                </div>
+                <div class="probootstrap-card-extra">
+                    <ul>
+                      <h2><span>{{item.dormitory}}</span></h2>
+                      </ul>
+                    <ul>
+                      <span>{{item.comment}}</span>
+                    </ul>
+
+                </div>
+              </div>
+              <!-- END listing -->
+            </div>
+            {% endfor %}
+
+
+        {% else %}
+          <div class="col-md-10 col-sm-10">
+            <h2>Nenašiel sa žiaden zoznam predmetov </h2>
+          </div>
+          {% endif %}
+        </div>
+    </div>
+  </section>
+
+
+
+
+
+  {% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% get_media_prefix %}
+{% block body %}
+
+
+
+  <section class="probootstrap-slider flexslider">
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+
+            <div class="probootstrap-home-search probootstrap-animate">
+              <form action="{% url 'item:item_list' %}" method="get">
+                <h2 class="heading">Vyhľadaj predmet</h2>
+                <div class="probootstrap-field-group">
+                  <div class="probootstrap-fields">
+
+                    <div class="search-field">
+                      <input type="text" name='q' class="form-control" placeholder="Hľadaný predmet (nepovinné)">
+                    </div>
+                    <div class="search-category">
+                      <i class="icon-chevron-down"></i>
+                      <select name="dom_list" id="" class="form-control">
+                        <option value="">Všetky</option>
+                        <option value="1">Mladosť</option>
+                        <option value="2">Dobrovičova</option>
+                        <option value="3">Nikosa Belojanisa</option>
+                        <option value="4">Juraja Hronca</option>
+                        <option value="5">Mladá Garda</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button class="btn btn-success" type="submit"><i class="icon-magnifying-glass t2"></i> Vyhľadaj</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- END: slider  -->
+
+
+
+
+  {% endblock body %}

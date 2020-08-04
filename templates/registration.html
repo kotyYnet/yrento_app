@@ -1,0 +1,27 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<section class="probootstrap-section probootstrap-section-lighter">
+  <div class="container">
+
+      {% if registered %}
+        <h1>Ďakujeme za registráciu!</h1>
+      {% else %}
+        <h1>Registrácia Tu</h1>
+        <h3>Vyplnťe prosím formulár.</h3>
+
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ user_form.as_p }}
+        <input type="submit" name="" value="Register">
+        </form>
+
+      {% endif %}
+
+    </div>
+
+
+  </section>
+
+{% endblock %}
